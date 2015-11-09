@@ -5,7 +5,7 @@ public void setup()
 {
   //your code here
   size(600,600);
-  background(0,0,0);
+  background(0,0,12);
   for(int i = 0; i<stars.length; i++){
     stars[i] = new Star(); 
   }
@@ -22,14 +22,20 @@ public void draw()
 }
 
 class Star{
-  private int myX, myY;
+  private int myX,myY;
+  private int cR; 
+  private int cG;
+  private int cB;
   public Star(){
     myX = (int)(Math.random()*600);
     myY = (int)(Math.random()*600);
+    cR =(int)(Math.random()*186); 
+    cG =(int)(Math.random()*136)+112;
+    cB =(int)(Math.random()*147)+116;
   }
   public void show(){
-    fill(255,255,255);
-    ellipse(myX, myY, 3,3);
+    fill(cR,cG,cB);
+    ellipse(myX, myY, 2,2);
   }
 
 }
