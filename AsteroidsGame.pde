@@ -76,6 +76,10 @@ class SpaceShip extends Floater
    
     
 }
+class Asteroid extends Floater
+{
+  public void Aster
+}
 
 public void keyPressed(){
    if (key == 'h'){
