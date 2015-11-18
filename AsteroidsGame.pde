@@ -34,7 +34,7 @@ class Star{
     cB =(int)(Math.random()*147)+116;
   }
   public void show(){
-    fill(cR,cG,cB);
+    stroke(cR,cG,cB);
     ellipse(myX, myY, 2,2);
   }
 
@@ -76,9 +76,17 @@ class SpaceShip extends Floater
    
     
 }
+
 class Asteroid extends Floater
 {
-  public void Aster
+  public Asteriod()
+  {
+  corners = 10;
+  int[] xS = {8,4,2,0,-5,-4,-6,-7,-3,0};
+  int[] yS = {0,-2,-5,6,6,4,2,-2,-4,-3}; 
+  xCorners = xS;
+  yCorners = yS;
+  }
 }
 
 public void keyPressed(){
