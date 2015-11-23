@@ -92,16 +92,16 @@ class Asteroid extends Floater
   public Asteroid()
   {
   corners = 10;
-  int[] xS = {8,4,2,0,-5,-4,-6,-7,-3,0};
-  int[] yS = {0,-2,-5,6,6,4,2,-2,-4,-3}; 
+  int[] xS = {16,8,4,0,-10,-8,-12,-14,-6,0};
+  int[] yS = {0,-4,-10,12,12,8,4,-4,-8,-6}; 
   xCorners = xS;
   yCorners = yS;
 
   myColor = color(92,90,90); 
   myCenterX = Math.random()*600;
   myCenterY = Math.random()*600;
-  myDirectionX = Math.random()*600;
-  myDirectionY = Math.random()*600;
+  myDirectionX = (Math.random()*2)-1;
+  myDirectionY = (Math.random()*2)-1;
   myPointDirection = 0;
 
   rotateSpeed = (int)(Math.random()*10)-5;
