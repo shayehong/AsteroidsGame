@@ -1,7 +1,7 @@
 //your variable declarations here
-Star[] stars = new Star[250];
-Asteroid[] rocks = new Asteroid[25];
+Star[] stars = new Star[200];
 SpaceShip ship = new SpaceShip();
+ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 //Asteroid rock = new Asteroid();
 public void setup() 
 {
@@ -11,8 +11,8 @@ public void setup()
   for(int i = 0; i<stars.length; i++){
     stars[i] = new Star(); 
   }
-  for(int i = 0; i< rocks.length; i++){
-    rocks[i] = new Asteroid(); 
+  for(int i = 0; i< 20; i++){
+     asteroids.add(new Asteroid());
   }
 }
 public void draw() 
@@ -22,10 +22,14 @@ public void draw()
   for(int i = 0; i<stars.length; i++){
     stars[i].show(); 
   }
-   for(int i = 0; i<rocks.length; i++){
-    rocks[i].move();
-    rocks[i].show(); 
+   for(int i = 0; i<asteroids.size(); i++){
+    asteroids.get(i).move();
+    asteroids.get(i).show();
+    if(dist(asteroids.get(i).getX(), asteroids.get(i).getY(), ship.getX(),ship.getY()) <20){
+       asteroids.remove(i);
+    }
   }
+
   ship.move();
   ship.show();
 }
@@ -126,8 +130,11 @@ class Asteroid extends Floater
 
 public void keyPressed(){
    if (key == 'h'){
-      ship.setX((int)(Math.random()*600));
-      ship.setY((int)(Math.random()*600));
+     ship.setX((int)(Math.random()*600));
+     ship.setY((int)(Math.random()*600));
+     ship.setDirectionX(0);
+     ship.setDirectionY(0);
+     ship.setPointDirection((int)(Math.random()*180));
     }
     if(keyCode == UP){
       ship.accelerate(0.1);
