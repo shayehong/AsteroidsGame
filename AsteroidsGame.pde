@@ -1,7 +1,9 @@
 //your variable declarations here
 Star[] stars = new Star[200];
 SpaceShip ship = new SpaceShip();
+Bullet b = new Bullet(ship);
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 //Asteroid rock = new Asteroid();
 public void setup() 
 {
@@ -14,6 +16,7 @@ public void setup()
   for(int i = 0; i< 20; i++){
      asteroids.add(new Asteroid());
   }
+
 }
 public void draw() 
 {
@@ -30,8 +33,19 @@ public void draw()
     }
   }
 
+  for(int i = 0; i< bullets.size(); i++){
+    bullets.get(i).move();
+    bullets.get(i).show();
+    if(dist(bullets.get(i).getX(), bullets.get(i).getY(), asteroids.get(i).getX(), asteroids.get(i).getY()) < 20){
+      asteroids.remove(i);
+      bullets.remove(i);
+    }
+  }
+
   ship.move();
   ship.show();
+  b.move();
+  b.show();
 }
 
 class Star{
@@ -127,7 +141,34 @@ class Asteroid extends Floater
     super.move();
   }
 }
+class Bullet extends Floater{
+  Bullet(SpaceShip theShip){
+    myCenterX = ship.getX();
+    myCenterY = ship.getY();
+    myPointDirection = ship.getPointDirection();
+    double dRadians = myPointDirection*(Math.PI/180);
+    myDirectionX = 5*Math.cos(dRadians)+ ship.getDirectionX();
+    myDirectionY = 5*Math.sin(dRadians)+ ship.getDirectionX();
+  }
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX = x;}
+  public double getDirectionX(){return myDirectionX;} 
+  public void setDirectionY(double y){myDirectionY = y;}
+  public double getDirectionY(){return myDirectionY;}
+  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public double getPointDirection(){return myPointDirection;}
 
+  public void move(){
+    super.move();
+  }
+  public void show(){
+    fill(255,0,0);
+    ellipse(getX(),getY(),5,5);
+  }
+}
 public void keyPressed(){
    if (key == 'h'){
      ship.setX((int)(Math.random()*600));
@@ -148,7 +189,9 @@ public void keyPressed(){
     if(keyCode == RIGHT){
       ship.rotate(15);
     }
-   
+    if(keyCode == ' '){
+      bullets.add(new Bullet());
+    }
 }
 
 
