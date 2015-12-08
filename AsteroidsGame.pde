@@ -44,8 +44,6 @@ public void draw()
 
   ship.move();
   ship.show();
-  b.move();
-  b.show();
 }
 
 class Star{
@@ -142,7 +140,7 @@ class Asteroid extends Floater
   }
 }
 class Bullet extends Floater{
-  Bullet(SpaceShip theShip){
+    public Bullet(SpaceShip ship){
     myCenterX = ship.getX();
     myCenterY = ship.getY();
     myPointDirection = ship.getPointDirection();
@@ -190,7 +188,7 @@ public void keyPressed(){
       ship.rotate(15);
     }
     if(keyCode == ' '){
-      bullets.add(new Bullet());
+      bullets.add(new Bullet(ship));
     }
 }
 
