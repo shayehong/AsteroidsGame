@@ -4,6 +4,7 @@ SpaceShip ship = new SpaceShip();
 Bullet b = new Bullet(ship);
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+int score = 0;
 //Asteroid rock = new Asteroid();
 public void setup() 
 {
@@ -36,14 +37,20 @@ public void draw()
   for(int i = 0; i< bullets.size(); i++){
     bullets.get(i).move();
     bullets.get(i).show();
-    if(dist(bullets.get(i).getX(), bullets.get(i).getY(), asteroids.get(i).getX(), asteroids.get(i).getY()) < 20){
+    if(dist(bullets.get(i).getX(), bullets.get(i).getY(), asteroids.get(i).getX(), asteroids.get(i).getY()) < 30){
       asteroids.remove(i);
       bullets.remove(i);
+      score ++; 
     }
+    if(bullets.get(i).getX() > 595 || bullets.get(i).getY() > 595){
+      bullets.remove(i);
+    }
+    
   }
 
   ship.move();
   ship.show();
+  text("Score: " + score, 50, 50);
 }
 
 class Star{
@@ -107,11 +114,13 @@ class Asteroid extends Floater
   private int rotateSpeed;
   public Asteroid()
   {
+    
   corners = 10;
   int[] xS = {16,8,4,0,-10,-8,-12,-14,-6,0};
   int[] yS = {0,-4,-10,12,12,8,4,-4,-8,-6}; 
   xCorners = xS;
   yCorners = yS;
+
 
   myColor = color(92,90,90); 
   myCenterX = Math.random()*600;
