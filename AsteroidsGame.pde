@@ -26,30 +26,37 @@ public void draw()
   for(int i = 0; i<stars.length; i++){
     stars[i].show(); 
   }
-   for(int i = 0; i<asteroids.size(); i++){
-    asteroids.get(i).move();
-    asteroids.get(i).show();
-    if(dist(asteroids.get(i).getX(), asteroids.get(i).getY(), ship.getX(),ship.getY()) <20){
-       asteroids.remove(i);
-    }
-  }
-
-  for(int i = 0; i< bullets.size(); i++){
-    bullets.get(i).move();
-    bullets.get(i).show();
-    if(dist(bullets.get(i).getX(), bullets.get(i).getY(), asteroids.get(i).getX(), asteroids.get(i).getY()) < 30){
-      asteroids.remove(i);
-      bullets.remove(i);
-      score ++; 
-    }
-    if(bullets.get(i).getX() > 595 || bullets.get(i).getY() > 595){
-      bullets.remove(i);
-    }
-    
-  }
-
   ship.move();
   ship.show();
+  for(int b = 0; b<bullets.size(); b++){
+    bullets.get(b).move();
+    bullets.get(b).show();
+  }
+
+  for(int i = 0; i<asteroids.size(); i++){
+    asteroids.get(i).move();
+    asteroids.get(i).show();
+      if(dist(asteroids.get(i).getX(), asteroids.get(i).getY(), ship.getX(),ship.getY()) <20){
+         asteroids.remove(i);
+         break;
+        } 
+      for(int b = 0; b< bullets.size(); b++){
+        //bullets.get(b).move();
+        //bullets.get(b).show();
+        if(dist((float)bullets.get(b).getX(),(float)bullets.get(b).getY(),(float)asteroids.get(i).getX(), (float)asteroids.get(i).getY()) < 25){
+          asteroids.remove(i);
+          bullets.remove(b);
+          score ++; 
+          break;
+        }
+        if(bullets.get(b).getX() > 595 || bullets.get(b).getY() > 595){
+          bullets.remove(b);
+        }
+        
+  }
+}
+
+  stroke(255,255,255);
   text("Score: " + score, 50, 50);
 }
 
